@@ -8,14 +8,17 @@ public class RacketController : MonoBehaviour
     private float myY;
     public float velocity = 5f;
     public float myLimit = 3.5f;
-
-    //identifying who is player 1
+    //Cariable to control the AI
+    public bool AI = false;
+    //Identifying who is player 1
     public bool player1;
+    //Getting the ball position
+    public Transform transformBall;
 
     // Start is called before the first frame update
     void Start()
     {
-        //taking the initial position of the racket and applying it to my position
+        //Taking the initial position of the racket and applying it to my position
         myPosition = transform.position;
     }
 
@@ -29,37 +32,55 @@ public class RacketController : MonoBehaviour
 
         float deltaVelocity = velocity * Time.deltaTime;
 
-        if (player1)
+        if (!AI)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (player1)
             {
-                myY = myY + deltaVelocity;
-            }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    myY = myY + deltaVelocity;
+                }
 
-            if (Input.GetKey(KeyCode.S))
-            {
-                myY = myY - deltaVelocity;
+                if (Input.GetKey(KeyCode.S))
+                {
+                    myY = myY - deltaVelocity;
+                }
             }
-        }else
-        {
-            if (Input.GetKey(KeyCode.UpArrow))
+            else
             {
-                myY = myY + deltaVelocity;
-            }
+                if (Input.GetKey(KeyCode.Return))
+                {
+                    AI = true;
+                }
 
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                myY = myY - deltaVelocity;
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    myY = myY + deltaVelocity;
+                }
+
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    myY = myY - deltaVelocity;
+                }
             }
         }
+        else
+        {
+            if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)){
+                AI = false;
+            }
 
-        //preventing me from going over the screen
+            myY = transformBall.position.y;
+            Mathf.Lerp(myY, transformBall.position.y, 0.02f);
+        }
+
+        //Preventing me from going over the screen
         if (myY > myLimit)
         {
             myY = myLimit;
         }
 
-        //preventing me from getting out from under the screen
+        //Preventing me from getting out from under the screen
         if (myY < -myLimit)
         {
             myY = -myLimit;
