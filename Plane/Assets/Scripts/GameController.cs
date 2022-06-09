@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private float posMin = -0.3f;
     [SerializeField] private float posMax = 2.4f;
     private float points = 0f;
-
+    [SerializeField] private Text pointsText;
+    private int level = 1;
+    [SerializeField] private Text levelText;
+    [SerializeField] private float nextLevel = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +27,7 @@ public class GameController : MonoBehaviour
     {
         Points();
         CreateObstacles();
+        WinLevel();
     }
 
     //method for handling points
@@ -30,7 +35,18 @@ public class GameController : MonoBehaviour
     {
         points += Time.deltaTime;
 
-        Debug.Log(Mathf.Round(points));
+        pointsText.text = Mathf.Round(points).ToString();
+    }
+
+    private void WinLevel()
+    {
+        levelText.text = level.ToString();
+        
+        if(points > nextLevel)
+        {
+            level++;
+            nextLevel *= 2;
+        }
     }
 
     //method to create obstacles
@@ -45,5 +61,10 @@ public class GameController : MonoBehaviour
 
             Instantiate(obstacle, position, Quaternion.identity);
         }
+    }
+
+    public int ReturnLevel()
+    {
+        return level;
     }
 }

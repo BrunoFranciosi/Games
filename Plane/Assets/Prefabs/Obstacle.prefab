@@ -265,3 +265,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 5
   montanha: {fileID: 8544994411967650171}
+  game: {fileID: 0}
