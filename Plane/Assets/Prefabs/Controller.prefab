@@ -50,4 +50,4 @@ MonoBehaviour:
   posMax: 2.4
   pointsText: {fileID: 0}
   levelText: {fileID: 0}
-  nextLevel: 10
+  nextLevel: 1

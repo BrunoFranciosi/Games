@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D myRB;
     [SerializeField] private float velocity = 5f;
+    //[SerializeField] private GameObject puff;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,22 @@ public class PlayerController : MonoBehaviour
             myRB.velocity = Vector2.up * velocity;
         }
 
+        //Instantiate(puff, transform.position, Quaternion.identity);
+
         if(myRB.velocity.y < -velocity)
         {
             myRB.velocity = Vector2.down * velocity;
+        }
+
+        restart();
+    }
+
+    //restarting when exiting the screen
+    private void restart()
+    {
+        if (transform.position.y > 5.5f || transform.position.y < -5.5f)
+        {
+            SceneManager.LoadScene("Game");
         }
     }
 

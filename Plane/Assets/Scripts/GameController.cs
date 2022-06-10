@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            timer = Random.Range(1f, 3f);
+            timer = Random.Range(1f/level, 3f);
 
             position.y = Random.Range(posMin, posMax);
 
