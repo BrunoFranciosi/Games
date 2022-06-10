@@ -50,4 +50,5 @@ MonoBehaviour:
   posMax: 2.4
   pointsText: {fileID: 0}
   levelText: {fileID: 0}
-  nextLevel: 1
+  nextLevel: 10
+  levelUp: {fileID: 8300000, guid: c48a3998d07e0fa4d8abd920b9b1a247, type: 3}

@@ -15,11 +15,13 @@ public class GameController : MonoBehaviour
     private int level = 1;
     [SerializeField] private Text levelText;
     [SerializeField] private float nextLevel = 10f;
+    [SerializeField] private AudioClip levelUp;
+    private Vector3 camPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        camPos = Camera.main.transform.position;
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class GameController : MonoBehaviour
     //method for handling points
     private void Points()
     {
-        points += Time.deltaTime;
+        points += Time.deltaTime * level;
 
         pointsText.text = Mathf.Round(points).ToString();
     }
@@ -44,6 +46,8 @@ public class GameController : MonoBehaviour
         
         if(points > nextLevel)
         {
+            AudioSource.PlayClipAtPoint(levelUp, camPos);
+
             level++;
             nextLevel *= 2;
         }
